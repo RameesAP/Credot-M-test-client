@@ -21,3 +21,4 @@ export const SliderTempData = [
         bg:"fcd1ed"
     },
 ]
+

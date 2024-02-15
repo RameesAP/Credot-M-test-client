@@ -9,6 +9,35 @@ const TopBrands = () => {
           <div className="font-bold text-sm"></div>
         </div>
         <hr />
+
+        <div class="flex overflow-x-scroll  pb-10 hide-scroll-bar border mt-7">
+          <div class="flex flex-nowrap lg:ml-30 md:ml-20 ml-10 ">
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+            <div class="inline-block px-3">
+              <div class="hover:cursor-pointer w-64 h-64 max-w-xs overflow-hidden rounded-full shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
