@@ -6,6 +6,8 @@ import ProductDetails from "./pages/ProductDetails";
 import Header from "./components/Header";
 import Cart from "./pages/Cart";
 import Footer from "./components/Footer";
+import SignUp from "./pages/SignUp";
+import Privateroute from "./components/Privateroute";
 
 function App() {
   return (
@@ -14,9 +16,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/sign-up" element={<SignUp />} />
+
         <Route path="/product" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route element={<Privateroute />}>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>

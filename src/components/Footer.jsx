@@ -84,27 +84,27 @@ const Footer = () => {
                 More Information
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li class="mb-4">
+                <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Affiliates
                   </a>
                 </li>
-                <li class="mb-4">
+                <li className="mb-4">
                   <a href="#" className="hover:underline">
                     My Accounts
                   </a>
                 </li>
-                <li class="mb-4">
+                <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Offerzone
                   </a>
                 </li>
-                <li class="mb-4">
+                <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Gift Vouchers
                   </a>
                 </li>
-                <li class="mb-4">
+                <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Privacy Policy
                   </a>
@@ -116,7 +116,7 @@ const Footer = () => {
                 Social Media
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li class="mb-4">
+                <li className="mb-4">
                   {/* <a href="#" className="hover:underline">Privacy Policy</a> */}
                   <div className="flex gap-2">
                     <div className="p-3 bg-slate-100 rounded-full w-fit">

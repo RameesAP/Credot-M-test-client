@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  signInFailure,
-  signInStart,
-  signInSuccess,
-} from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+import { Link, useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -21,13 +14,11 @@ const SignIn = () => {
       [e.target.id]: e.target.value,
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(signInStart());
-
-      const res = await fetch("/api/auth/signin", {
+      setLoading(true);
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,28 +27,39 @@ const SignIn = () => {
       });
       const data = await res.json();
       if (data.success === false) {
-        dispatch(signInFailure(data.message));
+        setLoading(false);
+        setError(data.message);
         return;
       }
-      dispatch(signInSuccess(data));
-      navigate("/");
+      setLoading(false);
+      setError(null);
+      navigate("/sign-in");
     } catch (error) {
-      dispatch(signInFailure(error.message));
+      setLoading(false);
+      setError(error.message);
     }
   };
+
   return (
     <div className="flex justify-between items-center max-w-7xl  mx-auto  p-3">
       <div className="w-full h-[787px] bg-[#F4F4F4]  flex items-center justify-center">
         <div className=" h-[555px] w-[656px] flex flex-col items-center justify-center">
-          <h1 className="font-bold text-xl mb-5">Login to your account</h1>
+          <h1 className="font-bold text-xl mb-5">Register to your account</h1>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4 items-center"
           >
             <input
               className="w-96 h-[60px]"
+              type="text"
+              placeholder="Username"
+              id="username"
+              onChange={handleChange}
+            />
+            <input
+              className="w-96 h-[60px]"
               type="email"
-              placeholder="Email"
+              placeholder="email"
               id="email"
               onChange={handleChange}
             />
@@ -73,21 +75,22 @@ const SignIn = () => {
                 or
               </div>
             </div>
-
             <OAuth />
 
-            <button className="w-[176px] h-[52px] border bg-[#1AA5C3] text-white uppercase font-semibold">
-              Login
+            <button
+              disabled={loading}
+              className="w-[176px] h-[52px] border bg-[#1AA5C3] text-white uppercase font-semibold"
+            >
+              Register
             </button>
             <div className="">
               <div className="flex">
-                <p className="mr-2 font-light">Don't have an account?</p>
-                <Link to={"/sign-up"}>
-                  <span className="text-[#1AA5C3] ">Sign Up</span>
+                <p className="mr-2 font-light">Have an account?</p>
+                <Link to={"/sign-in"}>
+                  <span className="text-[#1AA5C3] ">Sign In</span>
                 </Link>
               </div>
             </div>
-            {/* {error && <p className="text-red-500 mt-5">{error}</p>} */}
           </form>
         </div>
       </div>
@@ -95,4 +98,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
