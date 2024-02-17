@@ -25,7 +25,7 @@ function App() {
           path="/sign-up"
           element={currentUser ? <Navigate to="/" /> : <SignUp />}
         />
-        <Route path="/product" element={<ProductDetails />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route element={<Privateroute />}>
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
