@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const OAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const BASE_URL = "https://credotbackramees.onrender.com";
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -17,7 +18,7 @@ const OAuth = () => {
 
       const result = await signInWithPopup(auth, provider);
 
-      const res = await fetch("/api/auth/google", {
+      const res = await fetch(`${BASE_URL}/api/auth/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
