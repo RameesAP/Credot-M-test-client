@@ -86,6 +86,9 @@ const HomePageProducts = () => {
             </div>
           </div>
         </div>
+        <div className="md:hidden">
+          <div className="w-full border h-full">sds</div>
+        </div>
       </div>
     </div>
   );

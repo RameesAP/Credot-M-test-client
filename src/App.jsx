@@ -9,6 +9,8 @@ import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
 import Privateroute from "./components/Privateroute";
 import { useSelector } from "react-redux";
+import Order from "./pages/Order";
+import CatProducts from "./pages/CatProducts";
 
 function App() {
   const { currentUser } = useSelector((state) => state.user);
@@ -26,9 +28,11 @@ function App() {
           element={currentUser ? <Navigate to="/" /> : <SignUp />}
         />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/catproducts" element={<CatProducts />} />
         <Route element={<Privateroute />}>
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/order" element={<Order />} />
         </Route>
       </Routes>
       <Footer />

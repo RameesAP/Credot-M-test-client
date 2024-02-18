@@ -4,12 +4,19 @@ import { FaMinus } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 import { useParams } from "react-router-dom";
 import { TiTick } from "react-icons/ti";
+import { addProduct } from "../redux/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
   const [selectedMemory, setSelectedMemory] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser,"currentUsercurrentUsercurrentUser");
   const { id } = useParams();
   console.log(id, "paraaaaaaaaams");
   useEffect(() => {
@@ -17,6 +24,7 @@ const ProductDetails = () => {
       try {
         const response = await fetch(`/api/product/find/${id}`);
         const data = await response.json();
+        console.log(data,"data");
         setProduct(data);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -39,6 +47,49 @@ const ProductDetails = () => {
 
   const handleMemorySelect = (memoryOption) => {
     setSelectedMemory(memoryOption);
+  };
+
+  const handleClick = () => {
+    const memoryToUse = selectedMemory || product.memory[0];
+    const colorToUse = selectedColor || product.color[0];
+
+    // Update the endpoint to match your actual server endpoint
+    const addToCartEndpoint = "/api/cart/create";
+    const userId = currentUser ? currentUser._id : null;
+
+    // Prepare the data to be sent to the server
+    const data = {
+      userId,
+      productId: id,
+      quantity,
+      color: colorToUse,
+      memory: memoryToUse,
+      // Add any other necessary data here
+    };
+
+    // Make a POST request to the server
+    fetch(addToCartEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Include any other headers if needed
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        // Assuming your server returns some data, you can handle it here
+        // For example, you might want to update the Redux store with the added product
+        dispatch(addProduct(responseData));
+
+        // Reset the selected options and quantity after adding to cart
+        setSelectedMemory(null);
+        setSelectedColor(null);
+        setQuantity(1);
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart:", error);
+      });
   };
   return (
     <div className="flex justify-between items-center max-w-7xl  mx-auto  p-3 border">
@@ -69,7 +120,7 @@ const ProductDetails = () => {
                       onClick={() => handleColorSelect(color)}
                     >
                       <div
-                        className={`w-7 h-7 rounded-full bg-${color}-500 ${
+                        className={`w-7 h-7 rounded-full bg-${color}-600 ${
                           selectedColor === color
                             ? "text-white flex items-center justify-center"
                             : ""
@@ -85,17 +136,17 @@ const ProductDetails = () => {
                 <h1 className="font-semibold">Internal Memory</h1>
 
                 <div className=" flex mt-3 mb-3 gap-3">
-                  {product.memory.map((memoryOption, index) => (
+                  {product.memory.map((memory, index) => (
                     <div
                       key={index}
                       className={`w-20 h-10 border flex items-center justify-center font-medium hover:cursor-pointer ${
-                        selectedMemory === memoryOption
+                        selectedMemory === memory
                           ? "bg-black text-white"
                           : ""
                       }`}
-                      onClick={() => handleMemorySelect(memoryOption)}
+                      onClick={() => handleMemorySelect(memory)}
                     >
-                      {memoryOption} GB
+                      {memory} GB
                     </div>
                   ))}
                 </div>
@@ -120,7 +171,7 @@ const ProductDetails = () => {
                   </div>
                 </div>
                 <div className="ml-3">
-                  <button className="w-[200px] bg-black font-semibold text-white h-[48px] uppercase">
+                  <button onClick={handleClick} className="w-[200px] bg-black font-semibold text-white h-[48px] uppercase">
                     Add to cart
                   </button>
                 </div>
@@ -131,7 +182,7 @@ const ProductDetails = () => {
                   <CiHeart size={30} />
                 </div>
                 <div className="uppercase text-slate-500 text-sm font-semibold">
-                  {" "}
+                  
                   add to wishlist
                 </div>
               </div>
