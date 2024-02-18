@@ -14,6 +14,7 @@ const SignIn = () => {
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const BASE_URL = "https://credotbackramees.onrender.com";
 
   const handleChange = (e) => {
     setFormData({
@@ -27,7 +28,7 @@ const SignIn = () => {
     try {
       dispatch(signInStart());
 
-      const res = await fetch("/api/auth/signin", {
+      const res = await fetch(`${BASE_URL}/api/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -6,12 +6,13 @@ const CatProducts = () => {
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category");
   const [products, setProducts] = useState([]);
+  const BASE_URL = "https://credotbackramees.onrender.com";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `/api/product/getallpro?category=${category}`
+          `${BASE_URL}/api/product/getallpro?category=${category}`
         );
 
         if (!response.ok) {

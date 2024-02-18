@@ -8,6 +8,7 @@ const Cart = () => {
   const [productQuantities, setProductQuantities] = useState({});
   const [cartData, setCartData] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
+  const BASE_URL = "https://credotbackramees.onrender.com";
 
   useEffect(() => {
     if (!currentUser) {
@@ -18,7 +19,7 @@ const Cart = () => {
     const fetchCartData = async () => {
       try {
         const response = await fetch(
-          `/api/cart/usercartprod/${currentUser._id}`
+          `${BASE_URL}/api/cart/usercartprod/${currentUser._id}`
         );
         const data = await response.json();
 
@@ -56,7 +57,7 @@ const Cart = () => {
 
       // Make a request to the server to update the quantity
       const response = await fetch(
-        `/api/cart/updateQuantity/${currentUser._id}`,
+        `${BASE_URL}/api/cart/updateQuantity/${currentUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -100,7 +101,7 @@ const Cart = () => {
     try {
       // Make a request to the server to remove the product from the cart
       const response = await fetch(
-        `/api/cart/removeproduct/${currentUser._id}/${productId}`,
+        `${BASE_URL}/api/cart/removeproduct/${currentUser._id}/${productId}`,
         {
           method: "DELETE",
         }

@@ -19,10 +19,12 @@ const ProductDetails = () => {
   console.log(currentUser,"currentUsercurrentUsercurrentUser");
   const { id } = useParams();
   console.log(id, "paraaaaaaaaams");
+
+  const BASE_URL = "https://credotbackramees.onrender.com";
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/product/find/${id}`);
+        const response = await fetch(`${BASE_URL}/api/product/find/${id}`);
         const data = await response.json();
         console.log(data,"data");
         setProduct(data);
@@ -54,7 +56,7 @@ const ProductDetails = () => {
     const colorToUse = selectedColor || product.color[0];
 
     // Update the endpoint to match your actual server endpoint
-    const addToCartEndpoint = "/api/cart/create";
+    const addToCartEndpoint = `${BASE_URL}/api/cart/create`;
     const userId = currentUser ? currentUser._id : null;
 
     // Prepare the data to be sent to the server
