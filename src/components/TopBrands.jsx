@@ -40,7 +40,7 @@ const TopBrands = () => {
     // Add more category-image mappings as needed
   };
   return (
-    <div className="flex justify-between items-center max-w-7xl  mx-auto  p-3 border">
+    <div className="flex justify-between items-center max-w-7xl  mx-auto  p-3 ">
       <div className="h-[469px] w-full">
         <div className="  flex items-center justify-between p-4">
           <div className="font-bold text-2xl">Top Brands</div>
@@ -48,7 +48,7 @@ const TopBrands = () => {
         </div>
         <hr />
 
-        <div className="flex overflow-x-scroll  pb-10 hide-scroll-bar border mt-7">
+        <div className="flex overflow-x-scroll  pb-10 hide-scroll-bar  mt-7">
           <div className="flex flex-nowrap lg:ml-30 md:ml-20 ml-10 ">
             {productData.map((category, index) => (
               <div key={index} className="inline-block px-3">

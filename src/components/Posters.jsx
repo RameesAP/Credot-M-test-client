@@ -2,7 +2,7 @@ import React from "react";
 
 const Posters = () => {
   return (
-    <div className="flex justify-between items-center max-w-7xl  mx-auto border p-3">
+    <div className="flex justify-between items-center max-w-7xl  mx-auto p-3">
       <div className=" md:flex p-1 items-center justify-center">
         <div className="w-full md:w-[60%] h-full  flex items-center p-2">
           <img
