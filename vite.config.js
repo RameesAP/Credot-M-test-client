@@ -7,8 +7,9 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "https://credotbackramees.onrender.com",
-        secure: true, // Change to true if your server uses HTTPS
-        changeOrigin: true, // Add this line for cross-origin requests
+        secure: true,
+        changeOrigin: true,
+        credentials: "include",
       },
     },
     port: 3000,
