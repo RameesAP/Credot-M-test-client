@@ -4,8 +4,10 @@ import { IoIosSearch } from "react-icons/io";
 import { IoMdPerson } from "react-icons/io";
 import { MdFavorite } from "react-icons/md";
 import { IoBagHandleSharp } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <header className="bg-white shadow-md">
       <div className="flex justify-between items-center max-w-7xl  mx-auto  p-3">
@@ -32,11 +34,20 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <Link to="/">
-            <li className=" p-3 bg-slate-100 rounded-full">
-              <IoMdPerson size={20} />
-            </li>
-          </Link>
+          {currentUser ? (
+        <Link to="/">
+          <li className="p-3 bg-slate-100 rounded-full">
+            <IoMdPerson size={20} />
+          </li>
+        </Link>
+      ) : (
+        <Link to="/sign-in">
+          {/* Redirect to login page if user doesn't exist */}
+          <li className="p-3 bg-slate-100 rounded-full">
+            <IoMdPerson size={20} />
+          </li>
+        </Link>
+      )}
           <Link to="/wishlist">
             <li className=" p-3 bg-slate-100 rounded-full">
               <MdFavorite size={20} />
