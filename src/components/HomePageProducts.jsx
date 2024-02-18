@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 const HomePageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const BASE_URL = "https://credotbackramees.onrender.com";
+  const { REACT_APP_BACKEND_URL } = import.meta.env;
+const BASE_URL = REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchData = async () => {

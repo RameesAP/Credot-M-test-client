@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 
 const TopBrands = () => {
   const [productData, setProductData] = useState([]);
+  const { REACT_APP_BACKEND_URL } = import.meta.env;
+  const BASE_URL = REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("/api/product/getallpro");
+        const response = await fetch(`${BASE_URL}/api/product/getallpro`);
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
         }
