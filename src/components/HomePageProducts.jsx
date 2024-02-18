@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 const HomePageProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const BASE_URL = "https://credotbackramees.onrender.com";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/product/getallpro");
+        const response = await fetch(`${BASE_URL}/api/product/getallpro`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {
