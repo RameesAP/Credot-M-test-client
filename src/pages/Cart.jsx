@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [productQuantities, setProductQuantities] = useState({});
   const [cartData, setCartData] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const BASE_URL = "https://credotbackramees.onrender.com";
 
   useEffect(() => {
@@ -23,15 +25,14 @@ const Cart = () => {
         );
         const data = await response.json();
 
-              // Extract and set quantities
-              const initialQuantities = {};
-              data.products.forEach((product) => {
-                initialQuantities[product.productId] = product.quantity;
-              });
-              setProductQuantities(initialQuantities);
+        // Extract and set quantities
+        const initialQuantities = {};
+        data.products.forEach((product) => {
+          initialQuantities[product.productId] = product.quantity;
+        });
+        setProductQuantities(initialQuantities);
         console.log(data);
         setCartData(data.products);
-        
       } catch (error) {
         console.error("Error fetching cart data:", error);
       }
@@ -42,18 +43,16 @@ const Cart = () => {
 
   const handleQuantity = async (type, productId) => {
     try {
-
       const currentQuantity = productQuantities[productId] || 0;
       // Calculate the new quantity based on the current state
       const newQuantity =
         type === "dec" ? Math.max(currentQuantity - 1, 0) : currentQuantity + 1;
 
-        if (newQuantity === 0) {
-          // If quantity is 0, remove the product
-          handleRemoveProduct(productId);
-          return;
-        }
-    
+      if (newQuantity === 0) {
+        // If quantity is 0, remove the product
+        handleRemoveProduct(productId);
+        return;
+      }
 
       // Make a request to the server to update the quantity
       const response = await fetch(
@@ -85,12 +84,12 @@ const Cart = () => {
         return product;
       });
 
-        // Update productQuantities with the new quantity
-        setProductQuantities((prevQuantities) => ({
-          ...prevQuantities,
-          [productId]: newQuantity,
-        }));
-    
+      // Update productQuantities with the new quantity
+      setProductQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [productId]: newQuantity,
+      }));
+
       setCartData(updatedProducts);
     } catch (error) {
       console.error("Error updating quantity:", error);
@@ -116,13 +115,11 @@ const Cart = () => {
 
       // Update the local state with the new cart data
       setCartData(updatedCartData.products);
-      window.location.reload();
+      navigate("/");
     } catch (error) {
       console.error("Error removing product:", error);
     }
   };
-
-  
 
   const calculateTotalAmounts = () => {
     const subtotal = cartData.reduce((total, product) => {
@@ -136,7 +133,6 @@ const Cart = () => {
   };
 
   const { subtotal, total } = calculateTotalAmounts();
-
 
   return (
     <div className="">
@@ -178,12 +174,12 @@ const Cart = () => {
                       </div>
                       <div className="flex items-center justify-between ml-4 flex-grow">
                         <span className="font-bold text-sm">
-                        {product.productDetails?.name}
+                          {product.productDetails?.name}
                         </span>
                       </div>
                     </div>
                     <span className="text-center w-1/5 font-semibold text-sm">
-                    ${product.productDetails?.price.toFixed(2)}
+                      ${product.productDetails?.price.toFixed(2)}
                     </span>
                     <div className="flex justify-center w-1/5">
                       <div className="border flex">
@@ -209,9 +205,10 @@ const Cart = () => {
                       </div>
                     </div>
                     <span className="text-center w-1/5 font-semibold text-sm">
-                    ${(
-          (product.productDetails?.price || 0) * product.quantity
-        ).toFixed(2)}
+                      $
+                      {(
+                        (product.productDetails?.price || 0) * product.quantity
+                      ).toFixed(2)}
                     </span>
                   </div>
                 ))
