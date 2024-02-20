@@ -7,6 +7,7 @@ export default defineConfig({
     // proxy: {
     //   "/api": {
     //     target: "https://credotbackramees.onrender.com",
+    //     // target: "http://localhost:5000",
     //     secure: true,
     //     changeOrigin: true,
     //     credentials: "include",
