@@ -11,6 +11,7 @@ const HomePageProducts = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/product/getallpro`);
+        // const response = await fetch(`/api/product/getallpro`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {
