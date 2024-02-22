@@ -22,6 +22,7 @@ const Cart = () => {
       try {
         const response = await fetch(
           `${BASE_URL}/api/cart/usercartprod/${currentUser._id}`
+          // `/api/cart/usercartprod/${currentUser._id}`
         );
         const data = await response.json();
 
@@ -57,6 +58,7 @@ const Cart = () => {
       // Make a request to the server to update the quantity
       const response = await fetch(
         `${BASE_URL}/api/cart/updateQuantity/${currentUser._id}`,
+        // `/api/cart/updateQuantity/${currentUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -101,6 +103,7 @@ const Cart = () => {
       // Make a request to the server to remove the product from the cart
       const response = await fetch(
         `${BASE_URL}/api/cart/removeproduct/${currentUser._id}/${productId}`,
+        // `/api/cart/removeproduct/${currentUser._id}/${productId}`,
         {
           method: "DELETE",
         }
@@ -168,7 +171,7 @@ const Cart = () => {
                       <div className="w-20">
                         <img
                           className="h-24"
-                          src={product.productDetails?.image}
+                          src={product.productDetails?.image[0]}
                           alt={product.productDetails?.name}
                         />
                       </div>

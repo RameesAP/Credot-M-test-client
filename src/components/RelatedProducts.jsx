@@ -48,7 +48,7 @@ const RelatedProducts = () => {
           <div key={index} className="w-full h-[394px] border">
             <div className=" h-[70%] flex items-center justify-center  relative">
               <Link to={`/product/${product._id}`} onClick={handleLinkClick}>
-                <img className="p-5" src={product.img} alt={product.title} />
+                <img className="p-5" src={product.img[0]} alt={product.title} />
               </Link>
               <div className="absolute w-10 h-10 border rounded-full bottom-5 end-5 bg-white flex items-center justify-center hover:bg-[#1AA5C3] hover:text-white">
                 <FaPlus />

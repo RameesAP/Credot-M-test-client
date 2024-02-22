@@ -13,7 +13,9 @@ const HomePageProducts = () => {
         const response = await fetch(`${BASE_URL}/api/product/getallpro`);
         // const response = await fetch(`/api/product/getallpro`);
         const data = await response.json();
+        console.log(data);
         setProducts(data);
+
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
@@ -40,7 +42,7 @@ const HomePageProducts = () => {
                   <Link to={`/product/${products[0]._id}`}>
                     <img
                       className="w-full"
-                      src={products[0].img}
+                      src={products[0].img[0]}
                       alt={products[0].title}
                     />
                   </Link>
@@ -70,7 +72,7 @@ const HomePageProducts = () => {
                 <div key={product._id} className=" p-4 border">
                   <div className=" h-[70%] flex items-center justify-center relative">
                     <Link to={`/product/${product._id}`}>
-                      <img className="" src={product.img} alt={product.title} />
+                      <img className="" src={product.img[0]} alt={product.title} />
                     </Link>
                     <div className="absolute hover:bg-[#1AA5C3] hover:text-white hover:cursor-pointer border p-2 rounded-full end-2 bottom-2">
                       <div className=" p-">

@@ -10,6 +10,7 @@ const TopBrands = () => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/product/getallpro`);
+        // const response = await fetch(`/api/product/getallpro`);
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
         }

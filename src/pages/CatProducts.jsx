@@ -13,6 +13,7 @@ const CatProducts = () => {
       try {
         const response = await fetch(
           `${BASE_URL}/api/product/getallpro?category=${category}`
+          // `/api/product/getallpro?category=${category}`
         );
 
         if (!response.ok) {
@@ -20,7 +21,7 @@ const CatProducts = () => {
         }
 
         const data = await response.json();
-        console.log(data, "dattttttttttttttttttttttttttttttttttttttttttttttt");
+        console.log(data, "dat");
         setProducts(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -39,7 +40,7 @@ const CatProducts = () => {
               <Link to={`/product/${product._id}`}>
                 <div className="h-[70%] flex items-center justify-center  ">
                   <img
-                    src={product.img}
+                    src={product.img[0]}
                     alt={product.title}
                     className="w-fit h-fit object-cover"
                   />

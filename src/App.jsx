@@ -7,16 +7,25 @@ import Header from "./components/Header";
 import Cart from "./pages/Cart";
 import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
-import Privateroute from "./components/Privateroute";
+import { Privateroute, AdminPrivateRoute } from "./components/Privateroute";
 import { useSelector } from "react-redux";
 import Order from "./pages/Order";
 import CatProducts from "./pages/CatProducts";
+import Admin from "./pages/Admin";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const { currentUser } = useSelector((state) => state.user);
+  const { currentAdmin } = useSelector((state) => state.admin);
+
+  const excludedRoutes = ["/admin", "/dashboard"];
+  const isInAdminSection = excludedRoutes.some((path) =>
+    window.location.pathname.startsWith(path)
+  );
+
   return (
     <BrowserRouter>
-      <Header />
+      {!isInAdminSection && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -34,8 +43,18 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/order" element={<Order />} />
         </Route>
+
+
+      {/* admin side */}
+        <Route
+          path="/admin"
+          element={currentAdmin ? <Navigate to="/dashboard" /> : <Admin />}
+        />
+        <Route element={<AdminPrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
-      <Footer />
+      {!isInAdminSection && <Footer />}
     </BrowserRouter>
   );
 }

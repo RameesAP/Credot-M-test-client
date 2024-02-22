@@ -138,7 +138,7 @@ const Footer = () => {
                 payment methods
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li class="mb-4">
+                <li className="mb-4">
                   {/* <a href="#" className="hover:underline">
                     Privacy Policy
                   </a> */}
