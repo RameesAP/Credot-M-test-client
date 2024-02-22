@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import {signInAdminStart,signInAdminSuccess,signInAdminFailure} from "../redux/admin/adminSlice"
 
-const SignIn = () => {
+const Admin = () => {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.admin);
   const navigate = useNavigate();
@@ -80,4 +80,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Admin;
