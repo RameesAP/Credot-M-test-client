@@ -15,7 +15,6 @@ const HomePageProducts = () => {
         const data = await response.json();
         console.log(data);
         setProducts(data);
-
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
@@ -72,7 +71,11 @@ const HomePageProducts = () => {
                 <div key={product._id} className=" p-4 border">
                   <div className=" h-[70%] flex items-center justify-center relative">
                     <Link to={`/product/${product._id}`}>
-                      <img className="" src={product.img[0]} alt={product.title} />
+                      <img
+                        className=""
+                        src={product.img[0]}
+                        alt={product.title}
+                      />
                     </Link>
                     <div className="absolute hover:bg-[#1AA5C3] hover:text-white hover:cursor-pointer border p-2 rounded-full end-2 bottom-2">
                       <div className=" p-">
@@ -107,13 +110,26 @@ const HomePageProducts = () => {
                 <div key={product._id} className="-600  mb-5">
                   <div className="h-fit  ">
                     <div className=" flex items-center justify-center   ">
-                      <img className=" h-fit" src={product.img} alt={product.title} />
+                      <Link to={`/product/${product._id}`}>
+                        <img
+                          className=" h-fit"
+                          src={product.img[0]}
+                          alt={product.title}
+                        />
+                      </Link>
                     </div>
                   </div>
                   <div className="h-[30%] p- ">
                     <div className="">
-                      <div className="font-bold">{product.title}</div>
-                      <div className="mt-2 flex text-slate-600">INR<div className="font-bold ml-2 text-black">{product.price}</div> </div>
+                      <Link to={`/product/${product._id}`}>
+                        <div className="font-bold">{product.title}</div>
+                      </Link>
+                      <div className="mt-2 flex text-slate-600">
+                        INR
+                        <div className="font-bold ml-2 text-black">
+                          {product.price}
+                        </div>{" "}
+                      </div>
                     </div>
                   </div>
                 </div>
